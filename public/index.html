@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    
+    <title>Home</title>
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var socket = io(); 
+    
+    // socket.on('greeting', function (data) { 
+    //     console.log(data.msg); 
+    //     socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' });
+       
+    // });
+
+    socket.on('curEpic',function(data){
+        $('#times').text(data);
+    });
+
+    $('#addEpic').on('click',function(){
+        socket.emit('addEpic');
+    })
+
+    $('#restEpic').on('click',function(){
+        socket.emit('restEpic');
+    })
+
+    });
+    
+</script>
+
+</head>
+
+<body>
+<h1>Epic Button Game</h1>    
+<h2>The Button has been pushed <span id="times">0</span>  Times(s)</h2>
+<p>push the button to update the count!</p>
+<button id="addEpic"  style="background-color: blue ; height: 50px; color: white" >Push the epic button</button><br><br>
+<button id="restEpic" style="background-color: red ;color: white">Rest Count</button>
+</body>
+
+</html>
+
